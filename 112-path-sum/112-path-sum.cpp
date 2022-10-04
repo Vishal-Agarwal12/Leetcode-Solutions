@@ -11,24 +11,14 @@
  */
 class Solution {
 public:
-    int fg=0;
-    void pathsUntil(TreeNode* root,int curr_sum,int targetSum) {
-        if(root == NULL) return;
-     
-        curr_sum=curr_sum+ root->val;
-        if(!root->left && !root->right) {
-            if(curr_sum==targetSum)
-                fg=1;
-                
-        }
-        pathsUntil(root->left,curr_sum, targetSum);
-        pathsUntil(root->right, curr_sum, targetSum);
-    }
-    
+  
     bool hasPathSum(TreeNode* root, int targetSum) {
-        int curr_sum=0;
-        pathsUntil(root,curr_sum,targetSum);
-        if(fg==1) return true;
-        else return false;
+        if(root==NULL) return false;
+        
+        targetSum=targetSum-root->val;
+        
+        if(targetSum==0 && root->left==NULL && root->right==NULL) return true;
+        
+        return hasPathSum(root->left,targetSum) || hasPathSum(root->right,targetSum);
     }
 };
