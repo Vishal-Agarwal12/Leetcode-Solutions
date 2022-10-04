@@ -23,12 +23,13 @@ public:
             for(int i=0;i<count;i++) {
                 TreeNode* curr = q.front();
                 q.pop();
-                if(i==count-1)
+                if(i==0)
                     res.push_back(curr->val);
-                if(curr->left != NULL)
-                    q.push(curr->left);
+                
                 if(curr->right != NULL)
                     q.push(curr->right);
+                if(curr->left != NULL)
+                    q.push(curr->left);
             }
         }
         return res;
