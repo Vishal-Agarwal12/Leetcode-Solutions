@@ -11,20 +11,22 @@
  */
 class Solution {
 public:
-    TreeNode* invertTree(TreeNode* root) {
-        if(!root) return root;
+    void invert(TreeNode* root){
+        if(root == NULL)
+            return;
         
-        queue<TreeNode*> q;
-        q.push(root);
-        while(!q.empty()) {
-            TreeNode* curr = q.front();
-            q.pop();
-            swap(curr->left, curr->right);
-            if(curr->left) 
-                q.push(curr->left);
-            if(curr->right)
-                q.push(curr->right);
-        }
+        TreeNode* temp = NULL;
+        temp = root->left;
+        root->left = root->right;
+        root->right = temp;
+        
+        invert(root->left);
+        invert(root->right);
+        
+        return;
+    }
+    TreeNode* invertTree(TreeNode* root) {
+        invert(root);
         return root;
     }
 };
